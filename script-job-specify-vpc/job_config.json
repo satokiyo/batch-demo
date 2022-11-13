@@ -1,0 +1,43 @@
+{
+  "taskGroups": [
+    {
+      "taskCount": "1",
+      "parallelism": "1",
+      "taskSpec": {
+        "computeResource": {
+          "cpuMilli": "1000",
+          "memoryMib": "512"
+        },
+        "runnables": [
+          {
+            "script": {
+              "text": "#!/bin/bash\ngsutil cp gs://test-batch-gcs-cp/data/dbtTokyoMeetup4.mp4 gs://test-batch-gcs-cp/backup\nsleep 1m"
+            }
+          }
+        ],
+        "volumes": []
+      }
+    }
+  ],
+  "allocationPolicy": {
+    "instances": [
+      {
+        "policy": {
+          "provisioningModel": "STANDARD",
+          "machineType": "e2-medium"
+        }
+      }
+    ],
+    "network": {
+      "networkInterfaces": [
+        {
+          "network": "https://www.googleapis.com/compute/v1/projects/ornate-spring-351002/global/networks/test-vpc",
+          "subnetwork": "https://www.googleapis.com/compute/v1/projects/ornate-spring-351002/regions/asia-southeast1/subnetworks/test-subnet-usc1"
+        }
+      ]
+    }
+  },
+  "logsPolicy": {
+    "destination": "CLOUD_LOGGING"
+  }
+}
